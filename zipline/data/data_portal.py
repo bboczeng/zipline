@@ -643,6 +643,9 @@ class DataPortal(object):
                                                  data_frequency)
 
         if isinstance(asset, Equity):
+            if data_frequency == 'daily':
+                dt = self.trading_calendar.session_open(dt)
+
             ratio = self.get_adjustments(asset, field, dt, perspective_dt)[0]
             spot_value *= ratio
 
