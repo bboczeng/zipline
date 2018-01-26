@@ -401,7 +401,7 @@ class DataPortalTestBase(WithDataPortal,
 
     @parameter_space(data_frequency=['daily', 'minute'],
                      field=['close', 'price'])
-    def test_get_adjusted_value_adjustment_ratio(self, data_frequency, field):
+    def test_get_adjustments(self, data_frequency, field):
         asset = self.asset_finder.retrieve_asset(self.DIVIDEND_ASSET_SID)
         calendar = self.trading_calendars[Equity]
         day = calendar.day
@@ -426,14 +426,12 @@ class DataPortalTestBase(WithDataPortal,
                 dt = calendar.session_open(dt)
                 perspective_dt = calendar.session_open(perspective_dt)
 
-            val = self.data_portal.get_adjusted_value(
+            val = self.data_portal.get_adjustments(
                 asset,
                 field,
                 dt,
                 perspective_dt,
-                data_frequency=data_frequency,
-                spot_value=1.0,
-            )
+            )[0]
             assert_almost_equal(val, expected,
                                 err_msg="at dt={} perspective={}"
                                 .format(dt, perspective_dt))
