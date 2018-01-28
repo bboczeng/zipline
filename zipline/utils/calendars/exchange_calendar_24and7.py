@@ -3,6 +3,7 @@ from itertools import chain
 
 from pytz import timezone
 from pandas.tseries.offsets import CustomBusinessDay
+from zipline.utils.memoize import lazyval
 
 from .trading_calendar import TradingCalendar
 
