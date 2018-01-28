@@ -27,7 +27,7 @@ class TwentyFourSevenCalendar(TradingCalendar):
 
     @property
     def open_time(self):
-        return time(0, 1)
+        return time(0, 0)
 
     @property
     def close_time(self):
